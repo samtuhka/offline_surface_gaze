@@ -52,7 +52,7 @@ class Offline_Surface_Tracker(Surface_Tracker):
 
         self.load_marker_cache()
         #self.init_marker_cacher()
-        self.recalculate()
+        #self.recalculate()
 
 
     def load_marker_cache(self):

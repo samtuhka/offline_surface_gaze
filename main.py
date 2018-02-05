@@ -60,7 +60,7 @@ def main(rec_dir, surf):
     camera['dist_coefs'] = np.array([[.0,.0,.0,.0,.0]])
     camera['camera_matrix'] = np.array(camera['camera_matrix'])
     camera['resolution'] = np.array(camera['resolution'])
-
+    rows = 0
     for s in surface_tracker.surfaces:
         surface_name = '_'+s.name.replace('/','')+'_'+s.uid
         with open(os.path.join(rec_dir,'gaze_on_surface'+surface_name+'.csv'),'w',encoding='utf-8',newline='') as csvfile:
@@ -71,7 +71,9 @@ def main(rec_dir, surf):
                 ts = timestamps[idx]
                 if s.m_from_screen is not None:
                     for gp in s.gaze_on_srf_by_frame_idx(idx,s.m_from_screen):
-                        csv_writer.writerow( (ts,idx,gp['base_data']['timestamp'],gp['norm_pos'][0],gp['norm_pos'][1],gp['on_srf']) )
+                        rows += 1
+                        csv_writer.writerow( (ts,idx,gp['base_data']['timestamp'],gp['norm_pos'][0],gp['norm_pos'][1],gp['on_srf']))
+            print("{} rows of data written.".format(rows))
 if __name__ == '__main__':
     rootdir = sys.argv[1]
     surf = sys.argv[2]
