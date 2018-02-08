@@ -8,6 +8,10 @@ import logging
 from shutil import copyfile
 
 def correlate_data(data,timestamps):
+
+    data = sorted(data, key = lambda x: x['timestamp'])
+    timestamps = sorted(timestamps)
+
     timestamps = list(timestamps)
     data_by_frame = [[] for i in timestamps]
 
